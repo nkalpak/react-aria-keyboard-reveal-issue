@@ -1,0 +1,106 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+.demo-main {
+  padding: 16px;
+  max-width: 600px;
+}
+
+.demo-main p {
+  font-size: 14px;
+}
+
+.fix-toggle {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.event-log {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2147483647;
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 9px;
+  line-height: 1.25;
+  font-family: ui-monospace, monospace;
+  background: rgba(255, 255, 220, 0.92);
+  pointer-events: none;
+  white-space: pre-wrap;
+}
+
+/* A bottom sheet fixed to the layout viewport, extending beneath the iOS
+   keyboard. The keyboard inset is PANEL padding: the visual viewport's
+   shortfall against the layout viewport, derived from the
+   --visual-viewport-height custom property that react-aria-components
+   maintains on the ModalOverlay. It lifts the sheet body and actions above
+   the keyboard; once the grown panel hits max-height, the body wrapper
+   shrinks and starts clipping — the scroller only overflows at that moment. */
+.react-aria-ModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0 0 0 / 0.5);
+  z-index: 100;
+}
+
+.react-aria-Modal {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  border-radius: 12px 12px 0 0;
+  max-height: calc(100dvh - 24px);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  padding-bottom: calc(20px + (100dvh - var(--visual-viewport-height, 100dvh)));
+}
+
+.react-aria-Dialog {
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.react-aria-Dialog h2 {
+  margin-top: 0;
+}
+
+.sheet-body {
+  overflow: auto;
+  min-height: 0;
+  flex: 1;
+}
+
+.sheet-actions {
+  flex-shrink: 0;
+  padding-top: 12px;
+}
+
+.react-aria-TextField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+/* 16px so iOS Safari's small-font auto-zoom cannot muddy the repro. */
+.react-aria-Input {
+  font-size: 16px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
